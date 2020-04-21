@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import accountsModule from '@/store/accounts/accounts-store';
 import adminModule from '@/store/admin/admin-store';
+// import bannerModule from '@/store/banner/banner-store';
+import companyModule from '@/store/company/company-store';
 import deviceModule from '@/store/device-store';
 import notificationsModule from '@/store/notifications-store';
 import partnerModule from '@/store/partner/partner-store';
@@ -22,6 +24,7 @@ export default new Vuex.Store({
   modules: {
     admin: adminModule(injectionObj),
     accounts: accountsModule(injectionObj),
+    companies: companyModule(injectionObj),
     device: deviceModule(),
     notifications: notificationsModule(),
     partner: partnerModule(injectionObj),

@@ -1,7 +1,7 @@
 <template>
   <section class="auth-page bg-white h-screen">
     <div class="flex flex-wrap h-screen items-center">
-      <form class="max-w-xs mt-auto mx-auto p-6 w-full" method="post" name="validation" role="form" @submit.prevent="!disabled ? addPartnerCompanyAddress(partnerCompanyAddress) : enableEditMode()">
+      <form class="max-w-xs mt-auto mx-auto p-6 w-full" method="post" name="validation" role="form" @submit.prevent="!disabled ? (partnerCompany && partnerCompany.id > 0 ? updateCompany(partnerCompany) : addCompany(partnerCompany)) : enableEditMode()">
         <!-- <div class="mb-8 text-center">
           <img src="../../../assets/logo.png" class="mx-auto" width="125" alt="Apna Ad Lgao Logo">
         </div> -->
@@ -12,7 +12,7 @@
           </label>
           <input
             id="name"
-            v-model="partnerCompanyAddress.name"
+            v-model="partnerCompany.name"
             :disabled="disabled"
             class="
               appearance-none
@@ -30,18 +30,18 @@
               w-full
             "
             type="name"
-            placeholder="Work Address"
+            placeholder="Company Name"
           >
         </div>
 
         <div class="my-5">
-          <label class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase" for="name">
-            Building
+          <label class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase" for="description">
+            Description
           </label>
           <input
-            id="building"
+            id="description"
             :disabled="disabled"
-            v-model="partnerCompanyAddress.building"
+            v-model="partnerCompany.description"
             class="
               appearance-none
               bg-gray-100
@@ -58,64 +58,42 @@
               w-full
             "
             type="text"
-            placeholder="Building"
+            placeholder="About Company"
           >
         </div>
 
-        <div class="my-5">
-          <label class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase" for="landmark">
-            Landmark
+        <div class="my-5 relative">
+          <label class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase" for="user-role-select">
+            Address
           </label>
-          <input
-            id="password"
-            :disabled="disabled"
-            v-model="partnerCompanyAddress.landmark"
-            class="
-              appearance-none
-              bg-gray-100
-              block
-              border
-              focus:bg-white
-              focus:border-gray-400
-              focus:outline-none
-              leading-tight
-              px-4
-              py-2
-              rounded
-              text-gray-600
-              w-full
-            "
-            type="text"
-            placeholder="Near By Landmark"
-          >
-        </div>
-
-        <div class="my-5">
-          <label class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase" for="street">
-            Street
-          </label>
-          <input
-            id="street"
-            :disabled="disabled"
-            v-model="partnerCompanyAddress.street"
-            class="
-              appearance-none
-              bg-gray-100
-              block
-              border
-              focus:bg-white
-              focus:border-gray-400
-              focus:outline-none
-              leading-tight
-              px-4
-              py-2
-              rounded
-              text-gray-600
-              w-full
-            "
-            type="text"
-            placeholder="Street"
-          >
+          <div class="relative">
+            <select
+              id="user-role-select"
+              ref="user-role-select"
+              v-model="partnerCompany.addressId"
+              class="block appearance-none w-full bg-gray-100 border border-gray-400
+              hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none"
+              :disabled="disabled"
+            >
+              <option value="1">
+                Yes
+              </option>
+              <option value="0">
+                No
+              </option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-600"
+            >
+              <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
+          </div>
         </div>
 
         <div class="my-5">
@@ -125,7 +103,7 @@
           <input
             id="pincode"
             :disabled="disabled"
-            v-model.number="partnerCompanyAddress.pincode"
+            v-model.number="partnerCompany.pincode"
             class="
               appearance-none
               bg-gray-100
@@ -146,41 +124,13 @@
           >
         </div>
 
-        <div class="my-5">
-          <label class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase" for="state">
-            State
-          </label>
-          <input
-            id="state"
-            :disabled="disabled"
-            v-model.number="partnerCompanyAddress.stateId"
-            class="
-              appearance-none
-              bg-gray-100
-              block
-              border
-              focus:bg-white
-              focus:border-gray-400
-              focus:outline-none
-              leading-tight
-              px-4
-              py-2
-              rounded
-              text-gray-600
-              w-full
-            "
-            type="number"
-            placeholder="Select State"
-          >
-        </div>
-
         <button
           v-show="!disabled"
           :class="{ 'loading': request.key === 'login' && request.inProgress }"
           :disabled="request.key === 'login' && request.inProgress"
           class="bg-green-800 button font-bold hover:bg-green-600 leading-normal letter-spacing-1 mb-12 mt-2 py-3 rounded text-white uppercase w-full"
         >
-          Save Address
+          Save Company 
           <ring-loader />
         </button>
 
@@ -190,7 +140,7 @@
           :disabled="request.key === 'login' && request.inProgress"
           class="bg-gray-800 button font-bold hover:bg-gray-600 leading-normal letter-spacing-1 mb-12 mt-2 py-3 rounded text-white uppercase w-full"
         >
-          Edit Address
+          Edit Company
           <ring-loader />
         </button>
       </form>
@@ -210,7 +160,7 @@ export default {
   name: 'CompanyDetail',
   data() {
     return {
-      disabled: true,
+      disabled: false,
       isApp: process.env.VUE_APP_RUN_ENV === 'app',
       addresst: {
         name: '',
@@ -223,10 +173,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['request', 'version', 'partnerCompanyAddress']),
+    ...mapGetters(['request', 'version', 'partnerCompany']),
   },
   methods: {
-    ...mapActions(['addPartnerCompanyAddress', 'getPartnerCompanyAddress']),
+    ...mapActions(['addCompany', 'updateCompany', 'getPartnerCompany']),
     enableEditMode() {
       this.disabled = !this.disabled;
     },
@@ -238,8 +188,8 @@ export default {
     },
   },
   mounted() {
-    this.getPartnerCompanyAddress();
-    if (this.partnerCompanyAddress && this.partnerCompanyAddress.name) {
+    this.getPartnerCompany();
+    if (this.partnerCompany && this.partnerCompany.name) {
       this.disabled = true;
     }
   },
@@ -253,9 +203,11 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(currentVal, oldVal) {
       if (currentVal.name === 'Dashboard.Address') {
-        this.getPartnerCompanyAddress();
-        if (this.partnerCompanyAddress && this.partnerCompanyAddress.name) {
+        this.getPartnerCompany();
+        if (this.partnerCompany && this.partnerCompany.name) {
           this.disabled = true;
+        } else {
+
         }
       }
     },
