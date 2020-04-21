@@ -4,11 +4,15 @@ import ADDRESSES from '@/graphql/addresses/addresses.gql';
 
 export default ({ $http, $vf, $apollo }) => ({
   async addPartnerCompanyAddress(context, payload) {
-    const { name, building, landmark, street, pincode, stateId, isAdmin } = payload;
+    const {
+      name, building, landmark, street, pincode, stateId, isAdmin,
+    } = payload;
     // if (!name || !building || !landmark || !street || !pincode || !stateId) throw new Error(AUTH_ERRORS.INVALID_DETAIL.message);
     let { data } = await $apollo.mutate({
       mutation: ADD_ADDRESS,
-      variables: { name, building, landmark, street, pincode, stateId, isAdmin },
+      variables: {
+        name, building, landmark, street, pincode, stateId, isAdmin,
+      },
     });
     if (data && data.createAddress) {
       data = data.createAddress;

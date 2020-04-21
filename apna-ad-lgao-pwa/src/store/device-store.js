@@ -30,8 +30,8 @@ export default () => ({
     },
   },
   getters: {
-    device: state => state,
-    screenImgWidth: state => parseInt((state.screenWidth * state.screenDpi), 10),
-    version: state => state.version,
+    device: (state) => state,
+    screenImgWidth: (state) => parseInt((state.screenWidth * state.screenDpi), 10),
+    version: (state) => state.version,
   },
 });

@@ -225,8 +225,8 @@ module.exports = {
       wider: '.05em',
       widest: '.1em',
     },
-    textColor: theme => theme('colors'),
-    backgroundColor: theme => theme('colors'),
+    textColor: (theme) => theme('colors'),
+    backgroundColor: (theme) => theme('colors'),
     backgroundPosition: {
       bottom: 'bottom',
       center: 'center',
@@ -250,7 +250,7 @@ module.exports = {
       4: '4px',
       8: '8px',
     },
-    borderColor: theme => ({
+    borderColor: (theme) => ({
       ...theme('colors'),
       default: theme('colors.gray.300', 'currentColor'),
     }),
@@ -269,7 +269,7 @@ module.exports = {
       move: 'move',
       'not-allowed': 'not-allowed',
     },
-    width: theme => ({
+    width: (theme) => ({
       auto: 'auto',
       ...theme('spacing'),
       '1/2': '50%',
@@ -286,7 +286,7 @@ module.exports = {
       full: '100%',
       screen: '100vw',
     }),
-    height: theme => ({
+    height: (theme) => ({
       auto: 'auto',
       ...theme('spacing'),
       full: '100%',
@@ -318,9 +318,9 @@ module.exports = {
       full: '100%',
       screen: '100vh',
     },
-    padding: theme => theme('spacing'),
-    margin: theme => ({ auto: 'auto', ...theme('spacing') }),
-    negativeMargin: theme => theme('spacing'),
+    padding: (theme) => theme('spacing'),
+    margin: (theme) => ({ auto: 'auto', ...theme('spacing') }),
+    negativeMargin: (theme) => theme('spacing'),
     objectPosition: {
       bottom: 'bottom',
       center: 'center',

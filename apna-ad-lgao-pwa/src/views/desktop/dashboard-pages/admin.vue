@@ -251,9 +251,7 @@
 </template>
 
 <script>
-import gql from 'graphql-tag';
 import UserLoader from './loader/userLoader.vue';
-import CURRENT_USER from '@/graphql/users.gql';
 
 export default {
   name: 'Admin',
@@ -309,6 +307,7 @@ export default {
   },
 
   watch: {
+    // eslint-disable-next-line no-unused-vars
     $route(currentVal, oldVal) {
       if (currentVal.name === 'Dashboard.Admin') {
         // this.falseVar = !this.falseVar;

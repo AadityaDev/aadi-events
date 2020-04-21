@@ -25,6 +25,6 @@ export default () => ({
     },
   },
   getters: {
-    request: state => state,
+    request: (state) => state,
   },
 });

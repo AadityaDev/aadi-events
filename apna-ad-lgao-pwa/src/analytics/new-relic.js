@@ -48,7 +48,7 @@ const QueryStringToJSON = (string) => {
   return JSON.parse(JSON.stringify(result));
 };
 
-const sendEventData = async payload => Axios.post('https://insights-collector.newrelic.com/v1/accounts/1545251/events', payload, {
+const sendEventData = async (payload) => Axios.post('https://insights-collector.newrelic.com/v1/accounts/1545251/events', payload, {
   requestName: 'newRelic',
 });
 

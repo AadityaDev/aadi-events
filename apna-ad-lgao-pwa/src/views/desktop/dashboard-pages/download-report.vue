@@ -250,7 +250,6 @@ export default {
           type: 'error',
         });
       } else {
-
         this.loading = true;
         // delete Axios.defaults.headers.common.Authorization;
         Axios({
