@@ -2,6 +2,7 @@ import CURRENT_USER from '@/graphql/users.gql';
 import ADD_ADDRESS from '@/graphql/addresses/createAddress.gql';
 import ADDRESSES from '@/graphql/addresses/addresses.gql';
 
+// eslint-disable-next-line no-unused-vars
 export default ({ $http, $vf, $apollo }) => ({
   async addPartnerCompanyAddress(context, payload) {
     const {
