@@ -1,7 +1,7 @@
 <template>
   <section class="auth-page bg-white h-screen">
     <div class="flex flex-wrap h-screen items-center">
-      <form class="max-w-xs mt-auto mx-auto p-6 w-full" method="post" name="validation" role="form" @submit.prevent="!disabled ? addPartnerCompanyAddress(partnerCompanyAddress) : enableEditMode()">
+      <form class="max-w-xs mt-auto mx-auto p-6 w-full" method="post" name="validation" role="form" @submit.prevent="!disabled ? ((partnerAddress && partnerAddress.id > 0) ? updatePartnerAddress(partnerAddress) : addPartnerAddress(partnerAddress)) : enableEditMode()">
         <!-- <div class="mb-8 text-center">
           <img src="../../../assets/logo.png" class="mx-auto" width="125" alt="Apna Ad Lgao Logo">
         </div> -->
@@ -12,7 +12,7 @@
           </label>
           <input
             id="name"
-            v-model="partnerCompanyAddress.name"
+            v-model="partnerAddress.name"
             :disabled="disabled"
             class="
               appearance-none
@@ -41,7 +41,7 @@
           <input
             id="building"
             :disabled="disabled"
-            v-model="partnerCompanyAddress.building"
+            v-model="partnerAddress.building"
             class="
               appearance-none
               bg-gray-100
@@ -69,7 +69,7 @@
           <input
             id="password"
             :disabled="disabled"
-            v-model="partnerCompanyAddress.landmark"
+            v-model="partnerAddress.landmark"
             class="
               appearance-none
               bg-gray-100
@@ -97,7 +97,7 @@
           <input
             id="street"
             :disabled="disabled"
-            v-model="partnerCompanyAddress.street"
+            v-model="partnerAddress.street"
             class="
               appearance-none
               bg-gray-100
@@ -125,7 +125,7 @@
           <input
             id="pincode"
             :disabled="disabled"
-            v-model.number="partnerCompanyAddress.pincode"
+            v-model.number="partnerAddress.pincode"
             class="
               appearance-none
               bg-gray-100
@@ -146,14 +146,14 @@
           >
         </div>
 
-        <div class="my-5">
+        <div class="my-5" v-if="countries">
           <label class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase" for="state">
-            State
+            Country
           </label>
-          <input
+          <!-- <input
             id="state"
             :disabled="disabled"
-            v-model.number="partnerCompanyAddress.stateId"
+            v-model.number="partnerAddress.stateId"
             class="
               appearance-none
               bg-gray-100
@@ -171,7 +171,69 @@
             "
             type="number"
             placeholder="Select State"
-          >
+          > -->
+          <select
+            id="state-select"
+            ref="state-select"
+            v-model.number="partnerAddress.countryId"
+            class="appearance-none
+              bg-gray-100
+              block
+              border
+              focus:bg-white
+              focus:border-gray-400
+              focus:outline-none
+              leading-tight
+              px-4
+              py-2
+              rounded
+              text-gray-600
+              w-full"
+            :disabled="disabled"
+            >
+              <option v-for="state in countries" :key="state.id" :value="state.id">
+                {{state.name}}
+              </option>
+          </select>
+          <div class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase text-gray-600">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="my-5" v-if="countries">
+          <label class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase" for="state">
+            State
+          </label>
+          <select
+            id="state-select"
+            ref="state-select"
+            v-model.number="partnerAddress.stateId"
+            class="appearance-none
+              bg-gray-100
+              block
+              border
+              focus:bg-white
+              focus:border-gray-400
+              focus:outline-none
+              leading-tight
+              px-4
+              py-2
+              rounded
+              text-gray-600
+              w-full"
+            :disabled="disabled"
+            >
+              <option v-for="state in countries" :key="state.id" :value="state.id">
+                {{state.name}}
+              </option>
+          </select>
+          <div class="block font-bold letter-spacing-05 mb-1 ml-1 text-gray-600 text-gray-800 text-xs uppercase text-gray-600">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
         </div>
 
         <button
@@ -210,23 +272,15 @@ export default {
   name: 'Address',
   data() {
     return {
-      disabled: true,
+      disabled: false,
       isApp: process.env.VUE_APP_RUN_ENV === 'app',
-      addresst: {
-        name: '',
-        building: '',
-        landmark: '',
-        street: '',
-        pincode: 0,
-        stateId: 0,
-      },
     };
   },
   computed: {
-    ...mapGetters(['request', 'version', 'partnerCompanyAddress']),
+    ...mapGetters(['request', 'version', 'countries', 'partnerAddress']),
   },
   methods: {
-    ...mapActions(['addPartnerCompanyAddress', 'getPartnerCompanyAddress']),
+    ...mapActions(['getCountries', 'addPartnerAddress', 'getPartnerAddress', 'updatePartnerAddress']),
     enableEditMode() {
       this.disabled = !this.disabled;
     },
@@ -238,8 +292,9 @@ export default {
     },
   },
   mounted() {
-    this.getPartnerCompanyAddress();
-    if (this.partnerCompanyAddress && this.partnerCompanyAddress.name) {
+    this.getCountries();
+    this.getPartnerAddress();
+    if (this.partnerAddress && this.partnerAddress.name) {
       this.disabled = true;
     }
   },
@@ -253,8 +308,9 @@ export default {
     // eslint-disable-next-line no-unused-vars
     $route(currentVal, oldVal) {
       if (currentVal.name === 'Dashboard.Address') {
-        this.getPartnerCompanyAddress();
-        if (this.partnerCompanyAddress && this.partnerCompanyAddress.name) {
+        this.getCountries();
+        this.getPartnerAddress();
+        if (this.partnerAddress && this.partnerAddress.name) {
           this.disabled = true;
         }
       }

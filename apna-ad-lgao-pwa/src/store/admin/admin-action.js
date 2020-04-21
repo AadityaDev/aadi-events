@@ -2,8 +2,11 @@ import CURRENT_USER from '@/graphql/users.gql';
 
 export default ({ $http, $vf, $apollo }) => ({
   async getUsers(context) {
-    const { data } = await $apollo.query({ query: CURRENT_USER });
-    context.commit('setUserAndCompaniesInState', data.users);
-    return data.users;
+    let { data } = await $apollo.query({ query: CURRENT_USER });
+    if(data && data.users && data.user.length > 0) {
+      data = data.users;
+      context.commit('setUserAndCompaniesInState', data);
+    }
+    return data;
   },
 });

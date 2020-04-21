@@ -130,7 +130,7 @@
           :disabled="request.key === 'login' && request.inProgress"
           class="bg-green-800 button font-bold hover:bg-green-600 leading-normal letter-spacing-1 mb-12 mt-2 py-3 rounded text-white uppercase w-full"
         >
-          Save Company 
+          Save Company
           <ring-loader />
         </button>
 

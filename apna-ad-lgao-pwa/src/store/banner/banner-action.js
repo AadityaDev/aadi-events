@@ -1,6 +1,7 @@
 import CURRENT_USER from '@/graphql/users.gql';
 import ADD_ADDRESS from '@/graphql/addresses/createAddress.gql';
 import ADDRESSES from '@/graphql/addresses/addresses.gql';
+import { AUTH_ERRORS } from '../../utils/error';
 
 // eslint-disable-next-line no-unused-vars
 export default ({ $http, $vf, $apollo }) => ({
@@ -30,8 +31,11 @@ export default ({ $http, $vf, $apollo }) => ({
     return data;
   },
   async getPartnerBanners(context) {
-    const { data } = await $apollo.query({ query: CURRENT_USER });
-    context.commit('setPartnerBannersInState', data.banners);
+    let { data } = await $apollo.query({ query: CURRENT_USER });
+    if (data && data.banners && data.banners.length > 0) {
+      data = data.banners;
+      context.commit('setPartnerBannersInState', data);
+    }
     return data.banners;
   },
 });

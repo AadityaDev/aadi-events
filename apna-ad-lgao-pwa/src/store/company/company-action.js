@@ -6,7 +6,9 @@ import { AUTH_ERRORS } from '../../utils/error';
 // eslint-disable-next-line no-unused-vars
 export default ({ $http, $vf, $apollo }) => ({
   async addCompany(context, payload) {
-    const { name, description, image, isParentCompany, addressId, } = payload;
+    const {
+      name, description, image, isParentCompany, addressId,
+    } = payload;
     if (!name || !description || !image || !addressId) throw new Error(AUTH_ERRORS.INVALID_DETAIL.message);
     let { data } = await $apollo.mutate({
       mutation: COMPANY_ADD,

@@ -1,5 +1,5 @@
 query {
-	campaigns {
+    campaigns {
 		id
 		name
 		description
