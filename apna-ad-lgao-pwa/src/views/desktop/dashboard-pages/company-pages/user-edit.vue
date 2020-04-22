@@ -242,9 +242,11 @@
 <script>
 import ADD_USER from '@/graphql/addUser.gql';
 import FETCH_ALL_COMPANIES from '@/graphql/fetchAllCompanies.gql';
+// eslint-disable-next-line no-unused-vars
 import GETALL_VERTICALS from '@/graphql/fetchAllVerticals.gql';
 import GETALL_VERTICALS_FROM_COMPANY from '@/graphql/getVerticalByCompany.gql';
 // import UPDATE_USER from '@/graphql/updateUser.gql';
+// eslint-disable-next-line no-unused-vars
 import UPDATE_USERS_FLAG from '@/graphql/updateUsersFlag.gql';
 import ADD_USER_TO_COMPANY_VERTICAL from '@/graphql/addUserToCompanyVertical.gql';
 import ADD_USER_TO_COMPANY_VERTICALS from '@/graphql/addUserToCompanyVerticalS.gql';
@@ -360,6 +362,7 @@ export default {
         console.log(error.message);
       }
     },
+    // eslint-disable-next-line no-unused-vars
     async updateUser(userId, isVoc, isVod, isAdmin) {
       // try {
       //   const { data } = await this.$apollo.mutate({
@@ -462,7 +465,7 @@ export default {
       try {
         // console.log(event.target.dataset);
         // console.log('ID:', event.target.dataset.id);
-        const companyID = parseInt(event.target.value);
+        // const companyID = parseInt(event.target.value);
         // console.log("company id :"+ companyID );
         // console.log(companyVerticalRow);
         let { data } = await this.$apollo.query({
@@ -476,8 +479,8 @@ export default {
         [data] = data;
         console.log(`data is: ${JSON.stringify(data)}`);
         // console.log(data.getVerticalByCompany);
-        companyVerticalRow.selectedVertical = data.name;
-        companyVerticalRow.companyId = companyID;
+        // companyVerticalRow.selectedVertical = data.name;
+        // companyVerticalRow.companyId = companyID;
         // companyVerticalRow.selectedVertical = data.getVerticalByCompany.name;
 
         console.log('TCL: onAccountSelect -> this.verticalData', this.verticalData);

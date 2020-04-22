@@ -7,12 +7,14 @@ import { AUTH_ERRORS } from '../../utils/error';
 // eslint-disable-next-line no-unused-vars
 export default ({ $http, $vf, $apollo }) => ({
   async addOrderHistory(context, payload) {
-    const { total, status, fromDate, toDate, userId, bannerId } = payload;
+    const {
+      total, status, fromDate, toDate, userId, bannerId,
+    } = payload;
     if (!total || !status || !fromDate || !toDate || !userId || !bannerId) throw new Error(AUTH_ERRORS.INVALID_DETAIL.message);
     let { data } = await $apollo.mutate({
       mutation: ORDERHISTORY_ADD,
       variables: {
-        total, status, fromDate, toDate, userId, bannerId
+        total, status, fromDate, toDate, userId, bannerId,
       },
     });
     if (data && data.createOrderHistoryType) {
