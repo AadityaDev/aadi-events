@@ -196,7 +196,8 @@
                 <input
                   id=""
                   v-model="companyVerticalRow.selectedVertical"
-                  class="block appearance-none w-full bg-gray-100 border border-gray-400 hover:border-gray-500 px-4 py-2 rounded leading-tight focus:outline-none"
+                  class="block appearance-none w-full bg-gray-100 border border-gray-400 hover:border-gray-500 px-4 py-2
+                  rounded leading-tight focus:outline-none"
                   type="text"
                   placeholder="Ex: Jain"
                   :readonly="true"
@@ -244,6 +245,7 @@ import ADD_USER from '@/graphql/addUser.gql';
 import FETCH_ALL_COMPANIES from '@/graphql/fetchAllCompanies.gql';
 // eslint-disable-next-line no-unused-vars
 import GETALL_VERTICALS from '@/graphql/fetchAllVerticals.gql';
+// eslint-disable-next-line no-unused-vars
 import GETALL_VERTICALS_FROM_COMPANY from '@/graphql/getVerticalByCompany.gql';
 // import UPDATE_USER from '@/graphql/updateUser.gql';
 // eslint-disable-next-line no-unused-vars
@@ -475,10 +477,10 @@ export default {
         //     id: companyID,
         //   },
         // });
-        console.log(`darta : is : ${JSON.stringify(data)}`);
-        data = data.getVerticalByCompany;
-        [data] = data;
-        console.log(`data is: ${JSON.stringify(data)}`);
+        // console.log(`darta : is : ${JSON.stringify(data)}`);
+        // data = data.getVerticalByCompany;
+        // [data] = data;
+        // console.log(`data is: ${JSON.stringify(data)}`);
         // console.log(data.getVerticalByCompany);
         // companyVerticalRow.selectedVertical = data.name;
         // companyVerticalRow.companyId = companyID;
