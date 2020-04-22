@@ -11,7 +11,7 @@ export default ({ $http, $vf, $apollo }) => ({
     let { data } = await $apollo.mutate({
       mutation: STATE_ADD,
       variables: {
-        name
+        name,
       },
     });
     if (data && data.createState) {
@@ -49,6 +49,6 @@ export default ({ $http, $vf, $apollo }) => ({
       data = data.states[0];
       context.commit('setStateInState', data);
     }
-    return data.states;
+    return data;
   },
 });

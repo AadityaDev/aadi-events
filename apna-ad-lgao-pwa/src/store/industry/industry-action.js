@@ -11,7 +11,7 @@ export default ({ $http, $vf, $apollo }) => ({
     let { data } = await $apollo.mutate({
       mutation: INDUSTRY_ADD,
       variables: {
-        name
+        name,
       },
     });
     if (data && data.createIndustry) {

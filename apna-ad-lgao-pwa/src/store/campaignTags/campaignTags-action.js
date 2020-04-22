@@ -6,12 +6,14 @@ import { AUTH_ERRORS } from '../../utils/error';
 // eslint-disable-next-line no-unused-vars
 export default ({ $http, $vf, $apollo }) => ({
   async addCampaignTag(context, payload) {
-    const { uuid, model, platform, fingerprint } = payload;
+    const {
+      uuid, model, platform, fingerprint,
+    } = payload;
     if (!uuid || !model || !platform || !fingerprint) throw new Error(AUTH_ERRORS.INVALID_DETAIL.message);
     let { data } = await $apollo.mutate({
       mutation: CAMPAIGNTAGS_ADD,
       variables: {
-        uuid, model, platform, fingerprint
+        uuid, model, platform, fingerprint,
       },
     });
     if (data && data.createCampaignTag) {

@@ -11,7 +11,7 @@ export default ({ $http, $vf, $apollo }) => ({
     let { data } = await $apollo.mutate({
       mutation: MEDIATYPE_ADD,
       variables: {
-        name
+        name,
       },
     });
     if (data && data.createMediaType) {
@@ -49,6 +49,6 @@ export default ({ $http, $vf, $apollo }) => ({
       data = data.mediaTypes[0];
       context.commit('setMediaTypeInState', data);
     }
-    return data.mediaTypes;
+    return data;
   },
 });

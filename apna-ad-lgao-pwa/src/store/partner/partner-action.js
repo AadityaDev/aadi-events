@@ -1,4 +1,4 @@
-import CURRENT_USER from '@/graphql/users.gql';
+import CURRENT_USER from '@/graphql/users/users.gql';
 import ADD_ADDRESS from '@/graphql/addresses/createAddress.gql';
 import ADDRESSES from '@/graphql/addresses/addresses.gql';
 

@@ -244,7 +244,7 @@ import ADD_USER from '@/graphql/addUser.gql';
 import FETCH_ALL_COMPANIES from '@/graphql/fetchAllCompanies.gql';
 import GETALL_VERTICALS from '@/graphql/fetchAllVerticals.gql';
 import GETALL_VERTICALS_FROM_COMPANY from '@/graphql/getVerticalByCompany.gql';
-import UPDATE_USER from '@/graphql/updateUser.gql';
+// import UPDATE_USER from '@/graphql/updateUser.gql';
 import UPDATE_USERS_FLAG from '@/graphql/updateUsersFlag.gql';
 import ADD_USER_TO_COMPANY_VERTICAL from '@/graphql/addUserToCompanyVertical.gql';
 import ADD_USER_TO_COMPANY_VERTICALS from '@/graphql/addUserToCompanyVerticalS.gql';
@@ -361,20 +361,20 @@ export default {
       }
     },
     async updateUser(userId, isVoc, isVod, isAdmin) {
-      try {
-        const { data } = await this.$apollo.mutate({
-          mutation: UPDATE_USER,
-          variables: {
-            userId,
-            isVoc,
-            isVod,
-            isAdmin,
-          },
-        });
-        console.log('updateUser', data);
-      } catch (error) {
-        console.log(error.message);
-      }
+      // try {
+      //   const { data } = await this.$apollo.mutate({
+      //     mutation: UPDATE_USER,
+      //     variables: {
+      //       userId,
+      //       isVoc,
+      //       isVod,
+      //       isAdmin,
+      //     },
+      //   });
+      //   console.log('updateUser', data);
+      // } catch (error) {
+      //   console.log(error.message);
+      // }
     },
     async addUserToCompanyVertical(userId, companyId, verticalId) {
       try {

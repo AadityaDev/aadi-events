@@ -12,6 +12,10 @@ import deviceModule from '@/store/device-store';
 import industryModule from '@/store/industry/industry-store';
 import mediaTypeModule from '@/store/mediaType/mediaType-store';
 import stateModule from '@/store/state/state-store';
+import tagModule from '@/store/tags/tags-store';
+import userModule from '@/store/user/user-store';
+import userCompanyModule from '@/store/userCompany/userCompany-store';
+import userDeviceModule from '@/store/userDevice/userDevice-store';
 import notificationsModule from '@/store/notifications-store';
 import partnerModule from '@/store/partner/partner-store';
 import requestModule from '@/store/requests-store';
@@ -37,6 +41,13 @@ export default new Vuex.Store({
     companies: companyModule(injectionObj),
     country: countryModule(injectionObj),
     device: deviceModule(),
+    industry: industryModule(injectionObj),
+    media: mediaTypeModule(injectionObj),
+    state: stateModule(injectionObj),
+    tag: tagModule(injectionObj),
+    user: userModule(injectionObj),
+    userCompany: userCompanyModule(injectionObj),
+    userDevice: userDeviceModule(injectionObj),
     notifications: notificationsModule(),
     partner: partnerModule(injectionObj),
     request: requestModule(),

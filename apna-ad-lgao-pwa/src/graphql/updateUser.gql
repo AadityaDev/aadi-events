@@ -1,8 +1,0 @@
-mutation UpdateUser($userId: Int!, $isVoc: Int!, $isVod: Int!,$isHidden: Int!, $isAdmin: Int!) {
-  updateUser(userId: $userId, isVoc: $isVoc, isVod: $isVod, isHidden: $isHidden, isAdmin: $isAdmin) {
-    firstName
-    isVOC
-    isVOD
-    isAdmin
-  }
-}

@@ -6,12 +6,14 @@ import { AUTH_ERRORS } from '../../utils/error';
 // eslint-disable-next-line no-unused-vars
 export default ({ $http, $vf, $apollo }) => ({
   async addCountry(context, payload) {
-    const { name, alpha2code, alpha3code, isonumeric, continent} = payload;
+    const {
+      name, alpha2code, alpha3code, isonumeric, continent,
+    } = payload;
     if (!name || !alpha2code || !alpha3code || !isonumeric || !continent) throw new Error(AUTH_ERRORS.INVALID_DETAIL.message);
     let { data } = await $apollo.mutate({
       mutation: COUNTRY_ADD,
       variables: {
-        name, alpha2code, alpha3code, isonumeric, continent
+        name, alpha2code, alpha3code, isonumeric, continent,
       },
     });
     if (data && data.createCompany) {

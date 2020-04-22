@@ -464,7 +464,7 @@ import FETCH_ALL_COMPANIES from '@/graphql/fetchAllCompanies.gql';
 import FETCH_USER_DETAIL from '@/graphql/fetchUser.gql';
 // import GETALL_VERTICALS from '@/graphql/fetchAllVerticals.gql';
 import GETALL_VERTICALS_FROM_COMPANY from '@/graphql/getVerticalByCompany.gql';
-import UPDATE_USER from '@/graphql/updateUser.gql';
+// import UPDATE_USER from '@/graphql/updateUser.gql';
 import UPDATE_USER_STATE from '@/graphql/updateUserState.gql';
 // import UPDATE_USERS_FLAG from '@/graphql/updateUsersFlag.gql';
 import UPDATE_USERS_COMPANY_FLAG from '@/graphql/updateUserCompanyByVerticalFlag.gql';
@@ -733,10 +733,10 @@ export default {
         variable.isHidden = this.isHidden;
         variable.userId = this.userId;
         // console.log(variable);
-        await this.$apollo.mutate({
-          mutation: UPDATE_USER,
-          variables: variable,
-        });
+        // await this.$apollo.mutate({
+        //   mutation: UPDATE_USER,
+        //   variables: variable,
+        // });
         // console.log('updateUser', data);
         this.$store.dispatch('addToastNotifications', {
           text: 'User Updated Successfully !',

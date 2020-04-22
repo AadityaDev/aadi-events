@@ -54,7 +54,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import CURRENT_USER from '@/graphql/users.gql';
+import CURRENT_USER from '@/graphql/users/users.gql';
 
 export default {
   name: 'DashboardRoot',

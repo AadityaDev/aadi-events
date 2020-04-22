@@ -1,4 +1,4 @@
-import CURRENT_USER from '@/graphql/users.gql';
+import CURRENT_USER from '@/graphql/users/users.gql';
 import ADD_ADDRESS from '@/graphql/addresses/createAddress.gql';
 import ADDRESSES from '@/graphql/addresses/addresses.gql';
 import { AUTH_ERRORS } from '../../utils/error';
@@ -9,7 +9,7 @@ export default ({ $http, $vf, $apollo }) => ({
     const {
       name, building, landmark, street, pincode, stateId, isAdmin,
     } = payload;
-    // if (!name || !building || !landmark || !street || !pincode || !stateId) throw new Error(AUTH_ERRORS.INVALID_DETAIL.message);
+    if (!name || !building || !landmark || !street || !pincode || !stateId) throw new Error(AUTH_ERRORS.INVALID_DETAIL.message);
     let { data } = await $apollo.mutate({
       mutation: ADD_ADDRESS,
       variables: {
@@ -18,7 +18,7 @@ export default ({ $http, $vf, $apollo }) => ({
     });
     if (data && data.createAddress) {
       data = data.createAddress;
-      context.commit('setAddPartnerCompanyAddressInState', data);
+      context.commit('setAddPartnerBannerInState', data);
     }
     return data;
   },
@@ -26,7 +26,7 @@ export default ({ $http, $vf, $apollo }) => ({
     let { data } = await $apollo.query({ query: ADDRESSES });
     if (data && data.addresses && data.addresses.length > 0) {
       data = data.addresses[0];
-      context.commit('setPartnerCompanyAddressInState', data);
+      context.commit('setPartnerBannerInState', data);
     }
     return data;
   },
@@ -36,6 +36,6 @@ export default ({ $http, $vf, $apollo }) => ({
       data = data.banners;
       context.commit('setPartnerBannersInState', data);
     }
-    return data.banners;
+    return data;
   },
 });
