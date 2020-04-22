@@ -461,6 +461,7 @@ export default {
         console.log(error.message);
       }
     },
+    // eslint-disable-next-line no-unused-vars
     async onAccountSelect(companyVerticalRow, event) {
       try {
         // console.log(event.target.dataset);
@@ -468,12 +469,12 @@ export default {
         // const companyID = parseInt(event.target.value);
         // console.log("company id :"+ companyID );
         // console.log(companyVerticalRow);
-        let { data } = await this.$apollo.query({
-          query: GETALL_VERTICALS_FROM_COMPANY,
-          variables: {
-            id: companyID,
-          },
-        });
+        // let { data } = await this.$apollo.query({
+        //   query: GETALL_VERTICALS_FROM_COMPANY,
+        //   variables: {
+        //     id: companyID,
+        //   },
+        // });
         console.log(`darta : is : ${JSON.stringify(data)}`);
         data = data.getVerticalByCompany;
         [data] = data;

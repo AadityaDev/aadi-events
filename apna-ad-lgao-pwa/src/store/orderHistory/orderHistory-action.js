@@ -1,7 +1,7 @@
-import ORDERHISTORIES from '@/graphql/tags/tags.gql';
-import ORDERHISTORY_ADD from '@/graphql/tags/createOrderHistory.gql';
-import ORDERHISTORIES_DELETE from '@/graphql/tags/deleteOrderHistory.gql';
-import ORDERHISTORY_UPDATE from '@/graphql/tags/updateOrderHistory.gql';
+import ORDERHISTORIES from '@/graphql/orderHistories/orderHistories.gql';
+import ORDERHISTORY_ADD from '@/graphql/orderHistories/createOrderHistory.gql';
+import ORDERHISTORIES_DELETE from '@/graphql/orderHistories/deleteOrderHistory.gql';
+import ORDERHISTORY_UPDATE from '@/graphql/orderHistories/updateOrderHistory.gql';
 import { AUTH_ERRORS } from '../../utils/error';
 
 // eslint-disable-next-line no-unused-vars
