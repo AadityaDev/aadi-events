@@ -1,9 +1,0 @@
-query {
-    mediaTypes {
-		id
-        name
-		isHidden
-		created
-		updated
-	}
-}

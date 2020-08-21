@@ -1,7 +1,0 @@
-query fetchCompanyVocAndVodFromCompVertical($id: Int! , $companyVertical: Int! ) {
-  fetchCompanyVocAndVodFromCompVertical( id: $id , companyVertical:$companyVertical ) {
-    name
-    voc
-    vod
-  }
-}

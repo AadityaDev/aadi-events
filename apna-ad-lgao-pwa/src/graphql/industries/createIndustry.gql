@@ -1,9 +1,0 @@
-mutation createIndustry($name: String) {
-    createIndustry(name: $name) {
-        id
-        name
-		isHidden
-		created
-		updated
-    }
-}

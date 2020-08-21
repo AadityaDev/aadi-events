@@ -1,7 +1,0 @@
-mutation AddUserCompany($companyVerticalId: Int!, $userId: Int!) {
-  addUserCompany(companyVerticalId: $companyVerticalId, userId: $userId) {
-    id
-    companyVerticalId
-    userId
-  }
-}

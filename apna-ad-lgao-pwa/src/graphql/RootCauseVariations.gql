@@ -1,8 +1,0 @@
-query getRootCauseVariations($fromDate: String!, $toDate: String!){
-    getRootCauseVariations (fromDate: $fromDate, toDate: $toDate){
-        verticalName
-        companyName
-        voc
-        vod
-    }
-}

@@ -1,6 +1,0 @@
-query getVerticalByCompany($id: Int!) {
-  getVerticalByCompany(id: $id) {
-    id,
-    name
-  }
-}

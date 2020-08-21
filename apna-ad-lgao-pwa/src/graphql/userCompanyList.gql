@@ -1,8 +1,0 @@
-query UserCompanyList($userId:Int!) {
-    userCompanyList(userId: $userId) {
-        name: company
-        vertical
-        companyVerticalId
-        type
-    }
-}

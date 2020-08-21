@@ -1,9 +1,0 @@
-# query HelloWorld ($name: String) {
-#   hello (name: $name)
-# }
-
-query {
-  department{
-    name
-  }
-}

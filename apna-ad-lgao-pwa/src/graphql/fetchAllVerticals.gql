@@ -1,6 +1,0 @@
-query {
-  fetchAllVerticals {
-    id
-    name
-  }
-}

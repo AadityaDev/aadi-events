@@ -1,9 +1,0 @@
-mutation deleteTags($ids: [Int]) {
-    deleteTags(ids: $ids) {
-        id
-        name
-		isHidden
-		created
-		updated
-    }
-}

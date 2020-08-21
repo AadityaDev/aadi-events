@@ -1,9 +1,0 @@
-query getOverallAccountHealth($fromDate: String!, $toDate: String!){
-    getOverallAccountHealth (fromDate: $fromDate, toDate: $toDate){
-      vertical
-      vocMin
-      vocMax
-      vodMin
-      vodMax
-    }
-}

@@ -1,8 +1,0 @@
-query CompanyVerticalList($isVOC: Int!, $isVOD: Int!) {
-  companyVerticalList(isVOC: $isVOC, isVOD: $isVOD) {
-    companyName
-    verticalName
-    companyId
-    verticalId
-  }
-}
